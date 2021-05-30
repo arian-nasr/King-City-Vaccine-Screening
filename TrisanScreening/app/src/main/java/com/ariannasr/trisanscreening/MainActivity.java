@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -23,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final EditText phonetext = (EditText) findViewById(R.id.phonetext);
+        phonetext.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
     }
 
     public void SendPost() throws Exception {
@@ -41,7 +49,15 @@ public class MainActivity extends AppCompatActivity {
                 final EditText nametext = (EditText) findViewById(R.id.nametext);
                 final EditText phonetext = (EditText) findViewById(R.id.phonetext);
                 String name = nametext.getText().toString();
-                String phone = phonetext.getText().toString();
+                String phone = "";
+                String visitortype = null;
+                final Button button = (Button) findViewById(R.id.button);
+                final Switch staffswitch = (Switch) findViewById(R.id.switch1);
+                if (staffswitch.isChecked()) {
+                    visitortype = "e48e5d65-11e7-424e-b91b-ac3e012b4bad";
+                } else {
+                    visitortype = "b9558536-87d3-4395-aceb-ac3e012b4bad";
+                }
                 //Sends a POST request to the screening website with the form information & CSRF token
                 Connection.Response postconnection = Jsoup.connect(url)
                         .cookies(CSRFcookie)
@@ -51,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
                         //Email field
                         .data("Q_62ebd8c8-7d45-481d-a8b1-ad54a390a029_0", "anasr@my.yorku.ca")
                         //Phone number field
-                        .data("Q_f4a3bb2e-ebab-4660-a9a1-75c0d79fe0b4_0", "")
+                        .data("Q_f4a3bb2e-ebab-4660-a9a1-75c0d79fe0b4_0", phone)
                         //Staff or visitor field
-                        .data("Q_20cd46d1-3b95-46ad-81a3-b7b4d7fe7bf9_0", "b9558536-87d3-4395-aceb-ac3e012b4bad")
+                        .data("Q_20cd46d1-3b95-46ad-81a3-b7b4d7fe7bf9_0", visitortype)
                         //Facility fields
                         .data("Q_012d8ddf-e75a-4266-ae78-f59502862aa9_0", "Trisan Centre")
                         .data("Q_6b61b457-f325-41d7-9784-5cb4a959223f_0", "All Areas")
@@ -69,25 +85,45 @@ public class MainActivity extends AppCompatActivity {
                         //Send the POST
                         .method(Connection.Method.POST)
                         .execute();
-                System.out.println(postconnection.body());
-            final ImageView imageView = (ImageView) findViewById(R.id.imageView);
-            imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_checkmark));
+                //(222) 836-7723
+                Document doc = postconnection.parse();
+                Element thankyouElement = doc.select("#C_6f0e4814-ad73-437b-a6de-52cd6d556a06_0 > div > div > h1 > strong").first();
+                final ImageView imageView = (ImageView) findViewById(R.id.imageView);
+                if(thankyouElement != null) {
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_checkmark));
+                    //If request is successful clear the text fields
+                    nametext.getText().clear();
+                    phonetext.getText().clear();
+                    button.setText("Continue");
+                } else {
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_error));
+                    final TextView errortext = (TextView) findViewById(R.id.errorbox);
+                    errortext.setText("ERROR");
+                    button.setText("Try Again");
+                }
+                if (staffswitch.isChecked()) {
+                    staffswitch.toggle();
+                }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void sendMessage(View view) throws Exception {
         final Button button = (Button) findViewById(R.id.button);
-        //Makes the submit button un-clickable while form is being submitted
-        button.setEnabled(false);
-        SendPost();
-        //Once the form has been submitted the button is made clickable again
-        button.setEnabled(true);
-        //If request is successful clear the text fields
-        final EditText nametext = (EditText) findViewById(R.id.nametext);
-        final EditText phonetext = (EditText) findViewById(R.id.phonetext);
-        nametext.getText().clear();
-        phonetext.getText().clear();
+        final TextView errortext = (TextView) findViewById(R.id.errorbox);
+        final ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setImageResource(android.R.color.transparent);
+        errortext.setText("");
+        String buttontext = button.getText().toString();
+        if (buttontext.equals("Submit") || buttontext.equals("Try Again"))  {
+            //Makes the submit button un-clickable while form is being submitted
+            button.setEnabled(false);
+            SendPost();
+            //Once the form has been submitted the button is made clickable again
+            button.setEnabled(true);
+        } else if (buttontext.equals("Continue")) {
+            button.setText("Submit");
+        }
     }
 }
 
