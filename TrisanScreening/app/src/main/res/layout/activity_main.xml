@@ -15,11 +15,14 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="101dp"
         android:layout_marginRight="101dp"
+        android:layout_marginBottom="100dp"
         android:ems="10"
-        android:maxLength="14"
+        android:gravity="center"
         android:inputType="phone"
+        android:maxLength="14"
+        app:layout_constraintBottom_toTopOf="@+id/switch1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phonelabel" />
 
@@ -32,7 +35,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="138dp"
         android:layout_marginRight="138dp"
+        android:gravity="center"
         android:text="Attendee's Full Name:"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +50,7 @@
         android:layout_marginLeft="101dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="101dp"
+        android:gravity="center"
         android:layout_marginRight="101dp"
         android:ems="10"
         android:inputType="textNoSuggestions|textPersonName|textCapWords"
@@ -54,22 +60,25 @@
 
     <TextView
         android:id="@+id/phonelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="197dp"
+        android:layout_height="34dp"
         android:layout_marginStart="158dp"
         android:layout_marginLeft="158dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="157dp"
+        android:gravity="center"
         android:layout_marginRight="157dp"
         android:text="Phone Number:"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nametext" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="109dp"
-        android:layout_height="49dp"
+        android:layout_width="252dp"
+        android:layout_height="79dp"
         android:layout_marginStart="151dp"
         android:layout_marginLeft="151dp"
         android:layout_marginEnd="151dp"
@@ -80,15 +89,16 @@
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="67dp"
+        android:layout_height="40dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintEnd_toStartOf="@+id/textView4"
@@ -97,14 +107,16 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="41dp"
+        android:layout_height="22dp"
         android:layout_marginStart="17dp"
         android:layout_marginLeft="17dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="121dp"
         android:layout_marginRight="121dp"
+        android:gravity="center"
         android:text="Staff"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/switch1"
         app:layout_constraintTop_toBottomOf="@+id/phonetext" />
@@ -115,18 +127,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="110dp"
         android:layout_marginLeft="110dp"
-        android:layout_marginTop="108dp"
         android:layout_marginEnd="31dp"
         android:layout_marginRight="31dp"
+        android:gravity="center"
         android:text="Visitor"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/switch1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phonetext" />
+        tools:layout_editor_absoluteY="314dp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="329dp"
-        android:layout_height="299dp"
+        android:layout_width="418dp"
+        android:layout_height="369dp"
         android:layout_marginStart="41dp"
         android:layout_marginLeft="41dp"
         android:layout_marginTop="33dp"
@@ -145,6 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
         android:layout_marginLeft="176dp"
+        android:gravity="center"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="177dp"
         android:layout_marginRight="177dp"
@@ -153,5 +167,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="75dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
