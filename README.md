@@ -12,4 +12,4 @@ Email confirmation:
 ![image](https://user-images.githubusercontent.com/81041177/120221341-3d5f8b80-c20c-11eb-9389-8ba170e890f8.png)
 
 First launch:
-![Screenshot_1622479271](https://user-images.githubusercontent.com/81041177/120235630-7b6aa880-c228-11eb-86e3-dc2cdc4945c7.png)
+![Screenshot_1622490809](https://user-images.githubusercontent.com/81041177/120235688-989f7700-c228-11eb-9c36-75e9ac01268f.png)
