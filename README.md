@@ -7,3 +7,6 @@ App during error:
 
 App during successful submission:
 ![Screenshot_1622478592](https://user-images.githubusercontent.com/81041177/120221231-06897580-c20c-11eb-9b35-f255d46b505a.png)
+
+Email confirmation:
+![image](https://user-images.githubusercontent.com/81041177/120221341-3d5f8b80-c20c-11eb-9389-8ba170e890f8.png)
